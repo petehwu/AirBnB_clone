@@ -1,9 +1,8 @@
 #!/usr/bin/python3
 """Base class Definition"""
 import uuid
-from models.__init__ import storage
+import models
 from datetime import datetime
-
 
 class BaseModel:
     """ BaseModel definition"""
@@ -24,7 +23,7 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.utcnow()
             self.updated_at = datetime.utcnow()
-            storage.new(self)
+            models.storage.new(self)
 
     def __str__(self):
         """ method to format BaseModel for printing"""
@@ -34,7 +33,7 @@ class BaseModel:
     def save(self):
         """method to save the object"""
         self.updated_at = datetime.utcnow()
-        storage.save()
+        models.storage.save()
 
     def to_dict(self):
         """make dictionary with instance attributes"""
