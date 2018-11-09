@@ -15,14 +15,14 @@ class FileStorage:
 
     def new(self, obj):
         """ sets in __objects to the obj with key <obj class name>.id """
-        self.__object[obj.__class__ +"."+ obj.id] = obj
+        self.__objects[str(obj.__class__) +"."+ str(obj.id)] = obj
 
     def save(self):
         """ serializes __objects to the JSON file path """
-        x = json.dumps(self.__objects)
         with open("{}".format(self.__file_path),
                 mode='w', encoding='utf-8') as f:
-            f.write(x):
+            json.dump(f, self.__objects)
+            #f.write(x)
 
     def reload(self):
         """ deserializes the JSON file to __objects, if path exists or do

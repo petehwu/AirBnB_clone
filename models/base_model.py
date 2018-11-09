@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Base class Definition"""
 import uuid
-import storage
+from models.__init__ import storage
 from datetime import datetime
 
 
@@ -34,7 +34,7 @@ class BaseModel:
     def save(self):
         """method to save the object"""
         self.updated_at = datetime.utcnow()
-        storage.save(self)
+        storage.save()
 
     def to_dict(self):
         """make dictionary with instance attributes"""
