@@ -1,20 +1,20 @@
 #!/usr/bin/python3
 """Base class Definition"""
 import uuid
-from models.__init__ import storage
+import models
 from datetime import datetime
 
 
 class BaseModel:
     """ BaseModel definition"""
 
-
     def __init__(self, *args, **kwargs):
         """init method to initialize the values"""
         if (kwargs):
             for k, v in kwargs.items():
                 if (k == 'created_at' or k == 'updated_at'):
-                    setattr(self, k, datetime.strptime(v, "%Y-%m-%dT%H:%M:%S.%f"))
+                    setattr(self, k, datetime.strptime(
+                          v, "%Y-%m-%dT%H:%M:%S.%f"))
                 elif k == '__class__':
                     pass
                 else:
@@ -24,17 +24,18 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.utcnow()
             self.updated_at = datetime.utcnow()
-            storage.new(self)
+            models.storage.new(self)
 
     def __str__(self):
         """ method to format BaseModel for printing"""
-        thestr = "[{:s}] ({:s}) {}".format(type(self).__name__, self.id, self.__dict__)
+        thestr = "[{:s}] ({:s}) {}".format(
+              type(self).__name__, self.id, self.__dict__)
         return thestr
 
     def save(self):
         """method to save the object"""
         self.updated_at = datetime.utcnow()
-        storage.save()
+        models.storage.save()
 
     def to_dict(self):
         """make dictionary with instance attributes"""
@@ -47,4 +48,4 @@ class BaseModel:
                 temp_dict[k] = v.isoformat()
             else:
                 temp_dict[k] = v
-        return temp_dict 
+        return temp_dict

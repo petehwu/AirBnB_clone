@@ -7,7 +7,6 @@ if __name__ == "__main__":
 
     class HBNBCommand(cmd.Cmd):
         """ the console for teh air bnb """
-        
         prompt = "(hbtn) "
 
         def do_quit(self, line):
