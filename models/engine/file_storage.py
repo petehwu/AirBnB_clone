@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 """ the file storage class """
 import json
+import os
+from models.base_model import BaseModel
 
 class FileStorage:
     """ serializes and deserializes files to JSOn and back """
@@ -27,11 +29,8 @@ class FileStorage:
     def reload(self):
         """ deserializes the JSON file to __objects, if path exists or do
         nothing. no exceptions should raise """
-        try:
+        if os.path.isfile(self.__file_path):
             with open("{}".format(self.__file_path),
                     mode='r', encoding='utf-8') as f:
-                self.__objects = json.loads(f.read())
-                
-        except:
-            pass
-
+                x = json.loads(f.read())
+                self.__objects = Basemodel(x)
