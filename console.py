@@ -92,21 +92,58 @@ if __name__ == "__main__":
                     print("** no instance found **")
                 storage.save()
 
-            def do_all(self, line):
-                """ Prints a string of all instances or if given the class name,
-                of just the instances of the class name """
-                # should print a LIST of strings. easy.
-                # print all values in the storage.all()
-                pass
+        def do_all(self, line):
+            """ Prints a string of all instances or if given the class name,
+            of just the instances of the class name """
+            # print all values in the storage.all() if no paremeters entered
+            # otherwise print only values that match parameters entered
+            if (len(line) < 1):
+                l = ["{}".format(v) for k, v in storage.all().items()]
+                if l:
+                    print(l)
+                # print all instances in a list but do not print empty bracket if empty
+            else:
+                tokenize = shlex.split(line)
+                nf = []
+                for val in tokenize:
+                    if val not in self.classes:
+                        nf.append(val)
+                if nf:
+                    print("** class doesn't exist **")
+                else:
+                    l = ["{}".format(v) for k, v in storage.all().items()
+                         if type(v).__name__ in tokenize[0]]
+                    if l:
+                        print(l)
 
-            def do_update(self, line):
-                """ Updates an instance based on the class name and ID.
-                Adds or updates attributes ans saves the changes """
-                # TOO MANY WORDS
-                # lots of same checks for line lenths and error messages,
-                # should expect a str len of 4.
-                # 0 is class, 1 is id, 2 is attr, 3 is value.
-                # try an if or try in case arguments are bad?!?!
-                pass
+        def do_update(self, line):
+            """ Updates an instance based on the class name and ID.
+            Adds or updates attributes ans saves the changes """
+            # TOO MANY WORDS
+            # lots of same checks for line lenths and error messages,
+            # should expect a str len of 4.
+            # 0 is class, 1 is id, 2 is attr, 3 is value.
+            # try an if or try in case arguments are bad?!?!
+            if len(line) < 1:
+                print("** class name missing **")
+            else:
+                tokenize = shlex.split(line)
+                if len(tokenize) == 3:
+                    print ("** value missing**")
+                elif len(tokenize) == 2:
+                    print("** attribute name missing **")
+                elif len(tokenize) == 1:
+                    print("** instance id missing **")
+                else:
+                    if tokenize[0] not in self.classes:
+                        print("** class doesn't exist**")
+                    key = tokenize[0] + "." + tokenize[1]
+                    if not key in storage.all():
+                        print("** no instance found**")
+                    else:
+                        obj = storage.all().get(key, 0)
+                        setattr(obj, tokenize[2], tokenize[3])
+
+
 
     HBNBCommand().cmdloop()  # recursively loops back until exited or errors
