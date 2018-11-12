@@ -8,6 +8,12 @@ if __name__ == "__main__":
     from models.base_model import BaseModel  # explicit import the base class
     import shlex  # need the split function to tokenize commands
     from models import storage  # we need the objects and data held in this
+    from models.user import User
+    from models.state import State
+    from models.city import City
+    from models.amenity import Amenity
+    from models.place import Place
+    from models.review import Review
 
     class HBNBCommand(cmd.Cmd):
         """ The console for AirBnB,
@@ -101,7 +107,7 @@ if __name__ == "__main__":
                 l = ["{}".format(v) for k, v in storage.all().items()]
                 if l:
                     print(l)
-                # print all instances in a list but do not print empty bracket if empty
+            # print all instances but does not print empty brackets if empty
             else:
                 tokenize = shlex.split(line)
                 nf = []
@@ -129,7 +135,7 @@ if __name__ == "__main__":
             else:
                 tokenize = shlex.split(line)
                 if len(tokenize) == 3:
-                    print ("** value missing**")
+                    print("** value missing**")
                 elif len(tokenize) == 2:
                     print("** attribute name missing **")
                 elif len(tokenize) == 1:
@@ -138,12 +144,10 @@ if __name__ == "__main__":
                     if tokenize[0] not in self.classes:
                         print("** class doesn't exist**")
                     key = tokenize[0] + "." + tokenize[1]
-                    if not key in storage.all():
+                    if key not in storage.all():
                         print("** no instance found**")
                     else:
                         obj = storage.all().get(key, 0)
                         setattr(obj, tokenize[2], tokenize[3])
-
-
 
     HBNBCommand().cmdloop()  # recursively loops back until exited or errors
