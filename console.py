@@ -8,6 +8,12 @@ if __name__ == "__main__":
     from models.base_model import BaseModel  # explicit import the base class
     import shlex  # need the split function to tokenize commands
     from models import storage  # we need the objects and data held in this
+    from models.user import User
+    from models.state import State
+    from models.city import City
+    from models.amenity import Amenity
+    from models.place import Place
+    from models.review import Review
 
     class HBNBCommand(cmd.Cmd):
         """ The console for AirBnB,
