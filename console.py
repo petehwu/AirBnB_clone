@@ -19,7 +19,7 @@ if __name__ == "__main__":
         """ The console for AirBnB,
         written by Peter Wu and Bryan Leung """
 
-        prompt = "(hbtn) "  # the intranet's required prompt
+        prompt = "(hbnb) "  # the intranet's required prompt
         classes = {"BaseModel", "User", "State", "City",
                    "Amenity", "Place", "Review"}  # for tasks 8/ 9
 
@@ -30,7 +30,8 @@ if __name__ == "__main__":
 
         def do_EOF(self, line):
             """ EOF calls on quit """
-            do_quit()  # assuming EOF function does the same as do_quit
+            print()
+            exit()  # assuming EOF function does the same as do_quit
 
         def emptyline(self):
             """ do nothing """
@@ -118,7 +119,7 @@ if __name__ == "__main__":
                     print("** class doesn't exist **")
                 else:
                     l = ["{}".format(v) for k, v in storage.all().items()
-                         if type(v).__name__ in tokenize[0]]
+                         if type(v).__name__ in tokenize]
                     if l:
                         print(l)
 
@@ -148,6 +149,8 @@ if __name__ == "__main__":
                         print("** no instance found**")
                     else:
                         obj = storage.all().get(key, 0)
-                        setattr(obj, tokenize[2], tokenize[3])
+                        setattr(obj, tokenize[2],
+                                type(getattr(obj, tokenize[2]))(tokenize[3]))
+                    storage.save()
 
     HBNBCommand().cmdloop()  # recursively loops back until exited or errors
