@@ -109,7 +109,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             tokenize = shlex.split(line)
             if tokenize[0] not in self.classes:
-                print("** class doesn't exist")
+                print("** class doesn't exist **")
             else:
                 print(["{}".format(v) for k, v in storage.all().items()
                        if type(v).__name__ in tokenize[0]])
