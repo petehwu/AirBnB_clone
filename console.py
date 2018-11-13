@@ -149,8 +149,8 @@ if __name__ == "__main__":
                         print("** no instance found**")
                     else:
                         obj = storage.all().get(key, 0)
-                        setattr(obj, tokenize[2],
-                                type(getattr(obj, tokenize[2]))(tokenize[3]))
+                        setattr(obj, tokenize[2], type(getattr(obj,
+                                tokenize[2], ''))(tokenize[3]))
                     storage.save()
 
     HBNBCommand().cmdloop()  # recursively loops back until exited or errors
