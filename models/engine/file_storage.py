@@ -39,7 +39,6 @@ class FileStorage:
                     "Review": Review}
         if os.path.isfile(self.__file_path):
             with open(self.__file_path, mode='r', encoding='utf-8') as f:
-                if f.read():
-                    x = json.loads(f.read())
-                    for k, v in x.items():
+                x = json.loads(f.read())
+                for k, v in x.items():
                         self.__objects[k] = obj_dict[v["__class__"]](**v)
