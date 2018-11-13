@@ -104,23 +104,15 @@ class HBNBCommand(cmd.Cmd):
         # print all values in the storage.all() if no paremeters entered
         # otherwise print only values that match parameters entered
         if (len(line) < 1):
-            l = ["{}".format(v) for k, v in storage.all().items()]
-            if l:
-                print(l)
+            print(["{}".format(v) for k, v in storage.all().items()])
         # print all instances but does not print empty brackets if empty
         else:
             tokenize = shlex.split(line)
-            nf = []
-            for val in tokenize:
-                if val not in self.classes:
-                    nf.append(val)
-            if nf:
-                print("** class doesn't exist **")
+            if tokenize[0] not in self.classes:
+                print("** class doesn't exist")
             else:
-                l = ["{}".format(v) for k, v in storage.all().items()
-                     if type(v).__name__ in tokenize]
-                if l:
-                    print(l)
+                print(["{}".format(v) for k, v in storage.all().items()
+                       if type(v).__name__ in tokenize[0]])
 
     def do_update(self, line):
         """ Updates an instance based on the class name and ID.
