@@ -135,21 +135,24 @@ class HBNBCommand(cmd.Cmd):
         else:
             tokenize = shlex.split(line)
             if len(tokenize) == 3:
-                print("** value missing**")
+                print("** value missing **")
             elif len(tokenize) == 2:
                 print("** attribute name missing **")
             elif len(tokenize) == 1:
                 print("** instance id missing **")
             else:
                 if tokenize[0] not in self.classes:
-                     print("** class doesn't exist**")
+                    print("** class doesn't exist **")
                 key = tokenize[0] + "." + tokenize[1]
                 if key not in storage.all():
-                    print("** no instance found**")
+                    print("** no instance found **")
                 else:
                     obj = storage.all().get(key, 0)
-                    setattr(obj, tokenize[2], type(getattr(obj,
-                            tokenize[2], ''))(tokenize[3]))
+                    try:
+                        setattr(obj, tokenize[2], type(getattr(obj,
+                                tokenize[2]))(tokenize[3]))
+                    except AttributeError:
+                        setattr(obj, tokenize[2], tokenize[3])
                 storage.save()
 
 if __name__ == "__main__":
