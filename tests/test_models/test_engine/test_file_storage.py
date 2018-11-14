@@ -48,5 +48,38 @@ class TestFileStorage(unittest.TestCase):
         self.assertNotEqual(self.user.id, 98)
         self.assertEqual(self.user.id, "98")
 
+    def test_basic_init(self):
+        """ tests the init and file path? """
+        dank = BaseModel()
+        poop = FileStorage()
+        poopcopy = poop
+        notpoop = FileStorage()
+        self.assertEqual(poop, poopcopy)
+        self.assertNotEqual(poop, notpoop)
+        self.assertTrue(poop)
+        self.assertFalse(poop == notpoop)
+        self.assertIs(poop,poopcopy)
+        self.assertIsNot(poop, notpoop)
+        self.assertIsNotNone(poop)
+        self.assertIsInstance(poop, FileStorage)
+        self.assertNotIsInstance(dank, FileStorage)
+
+    def test_google_doc(self):
+        """ more harder tests """
+        storage = FileStorage()
+        
+        # Cell B 
+        self.assertEqual(type(storage._FileStorage__objects), dict)
+        self.assertTrue(storage._FileStorage__objects)
+        self.assertEqual(type(storage._FileStorage__file_path), str)
+        self.assertEqual(storage._FileStorage__file_path, "file.json")
+
+
+        # Cell C
+        all_storage = storage.all()
+        self.assertEqual(type(all_storage), dict)
+        #self.assertEqual(type(all_storage[]), object)
+
+
 if __name__ == "__main__":
     unittest.main()
