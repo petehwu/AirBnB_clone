@@ -117,5 +117,17 @@ class TestFileStorage(unittest.TestCase):
                     "Found code style errors (and warnings).")
             # this doesnt work lol
 
+        def test_methods(self):
+            """ tests the public instance mthods """
+            result = self.test.all()
+            self.assertTrue(result is not None)
+            result = self.test.new()
+            self.assertTrue(result is not None)
+            result = self.test.save()
+            self.assertTrue(result is not None)
+            result = self.test.reload()
+            self.assertTrue(result is not None)
+
+
 if __name__ == "__main__":
     unittest.main()
