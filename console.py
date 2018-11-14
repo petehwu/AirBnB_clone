@@ -12,6 +12,7 @@ from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
+import json
 
 
 class HBNBCommand(cmd.Cmd):
@@ -145,8 +146,63 @@ class HBNBCommand(cmd.Cmd):
                             setattr(obj, tokenize[2], type(getattr(obj,
                                     tokenize[2]))(tokenize[3]))
                         except AttributeError:
-                            setattr(obj, tokenize[2], tokenize[3])
+                            try:
+                                val = int(tokenize[3])
+                            except ValueError:
+                                try:
+                                    val = float(tokenize[3])
+                                except ValueError:
+                                    val = str(tokenize[3])
+                                
+                            setattr(obj, tokenize[2], val)
                         storage.save()
+    def do_count(self, line):
+        """ counts number of objects of specified class"""
+        if len(line) < 1:
+            print("** class name missing **")
+        else:
+            tokenize = shlex.split(line)
+            if tokenize[0] not in self.classes:
+                print("** class doesn't exist **")
+            else:
+                cnt = 0
+                obj = storage.all()
+                for k, v in obj.items():
+                    if type(v).__name__ == tokenize[0]:
+                        cnt += 1
+                print(cnt)
+
+    def default(self, line):
+        """default when user type in class using <class name>.all()"""
+        methods = {"all": self.do_all, "count": self.do_count, "show": self.do_show,
+                   "destroy": self.do_destroy, "update": self.do_update}
+        key = line.split(".")
+        if len(key) < 2:
+            print("** missing arguments **")
+        else:
+            subkey = key[1].split("(")
+            if subkey[0] not in methods:
+                print("** invalid command **")
+            else:
+                subkey[1] = subkey[1].replace(")", "")
+                if "{" in subkey[1]:
+                    subkey[1] = subkey[1].replace(',', ':', 1)
+                    t = '{' + subkey[1] + '}'
+                    t = t.replace("'", '"')
+                    d = {}
+                    try:
+                        d = json.loads(t)
+                    except: 
+                        print("** invalid format **")
+                        return
+                    for k, v in d.items():
+                        for k1, v1 in v.items():
+                            ustr =""
+                            ustr = key[0] + " "  + k + " " + k1 + " " + str(v1)
+                            methods[subkey[0]](ustr)
+                else:
+                    subkey[1] = subkey[1].replace(",", " ")
+                    methods[subkey[0]](key[0] + " " +subkey[1])
 
 if __name__ == "__main__":
     # protects against execution when imported
