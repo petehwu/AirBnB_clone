@@ -12,36 +12,24 @@ from models.review import Review
 class TestReview(unittest.TestCase):
     """test cases for review class"""
 
-    def setUp(self):
-        """ sets up this each test """
-        self.review = Review()
-        self.review.place_id = "98"
-        self.review.user_id = "Peter"
-        self.review.text = "text"
-        self.storage = FileStorage()
-
-    def tearDown(self):
-        """ tears down after each test. resets """
-        del self.review
-
     def test_docstring(self):
         """ checks if docstring is there """
         self.assertIsNotNone(Review.__doc__)
 
-    def test_file_storage_is_dict(self):
-        """testing if dict"""
-        st = FileStorage()
-        st_dict = st.all()
-        self.assertTrue(st_dict)
-        self.assertEqual(dict, type(st_dict))
 
     def test_review(self):
         """ checks review out. whatta hottie """
-        self.assertTrue(self.review)
-        self.assertEqual(self.review.user_id, "Peter")
-        self.assertNotEqual(self.review.place_id, 98)
-        self.assertEqual(self.review.place_id, "98")
-        self.assertEqual(self.review.text, "text")
+        r = Review()
+        self.assertEqual(type(r), Review)
+        self.assertEqual(r.place_id, "")
+        self.assertEqual(r.user_id, "")
+        self.assertEqual(r.text, "")
+        r.place_id = "a"
+        r.user_id = "b"
+        r.text = "c"
+        self.assertEqual(r.place_id, "a")
+        self.assertEqual(r.user_id, "b")
+        self.assertEqual(r.text, "c")
 
 if __name__ == "__main__":
     unittest.main()

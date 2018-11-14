@@ -24,7 +24,7 @@ class TestUser(unittest.TestCase):
     def test_user(self):
         """testing user class"""
         u = User()
-        self.assertIs(u, User)
+        self.assertEqual(type(u), User)
         self.assertEqual(u.email, "")
         self.assertEqual(u.password, "")
         self.assertEqual(u.first_name, "")
