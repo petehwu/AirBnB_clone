@@ -84,7 +84,14 @@ class TestFileStorage(unittest.TestCase):
                 all_storage[key])), "<class 'models.user.User'>")
 
         # Cell D
+        my_model = BaseModel()
+        self.assertEqual(
+                str(type(my_model)), "<class 'models.base_model.BaseModel'>")
+        self.assertEqual(
+                sorted(my_model.__dict__.keys()),
+                ['created_at', 'id', 'updated_at'])
 
+        # Cell E
 
 if __name__ == "__main__":
     unittest.main()
