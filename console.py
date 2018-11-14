@@ -153,9 +153,9 @@ class HBNBCommand(cmd.Cmd):
                                     val = float(tokenize[3])
                                 except ValueError:
                                     val = str(tokenize[3])
-                                
                             setattr(obj, tokenize[2], val)
                         storage.save()
+
     def do_count(self, line):
         """ counts number of objects of specified class"""
         if len(line) < 1:
@@ -174,8 +174,9 @@ class HBNBCommand(cmd.Cmd):
 
     def default(self, line):
         """default when user type in class using <class name>.all()"""
-        methods = {"all": self.do_all, "count": self.do_count, "show": self.do_show,
-                   "destroy": self.do_destroy, "update": self.do_update}
+        methods = {"all": self.do_all, "count": self.do_count,
+                   "show": self.do_show, "destroy": self.do_destroy,
+                   "update": self.do_update}
         key = line.split(".")
         if len(key) < 2:
             print("** missing arguments **")
@@ -192,17 +193,17 @@ class HBNBCommand(cmd.Cmd):
                     d = {}
                     try:
                         d = json.loads(t)
-                    except: 
+                    except:
                         print("** invalid format **")
                         return
                     for k, v in d.items():
                         for k1, v1 in v.items():
-                            ustr =""
-                            ustr = key[0] + " "  + k + " " + k1 + " " + str(v1)
+                            ustr = ""
+                            ustr = key[0] + " " + k + " " + k1 + " " + str(v1)
                             methods[subkey[0]](ustr)
                 else:
                     subkey[1] = subkey[1].replace(",", " ")
-                    methods[subkey[0]](key[0] + " " +subkey[1])
+                    methods[subkey[0]](key[0] + " " + subkey[1])
 
 if __name__ == "__main__":
     # protects against execution when imported
