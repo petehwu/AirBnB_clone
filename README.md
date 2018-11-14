@@ -1,11 +1,13 @@
-OVERVIEW:
-    -Make command interpreter to manage Airbnb objects
+# AirBnB Clone Part 1 by Peter Wu and Bryan Leung
 
+## OVERVIEW:
+    This repo contains the basis of our AirBnB project.
+    We Made command line interpreter(CLI) to manage and manipulate Airbnb objects. Such objects are Users, Places, Places, Reviews, Amenities, etc. And Python is the language used so every one of our data points are their own classes, which are objects or dicts that stores attributes and info.
 
-Future implementations:
-    -Front end web dev, database storage, API
+## How to run this Repo:
 
-
+    * git clone this repo  
+    * 
 Goals:
     -Create parent class (BaseModel) that handles init, (de)serialization of instances
     -Translate data from |||||| Instance ←→ Dict ←→ JSON ←→ file
@@ -26,9 +28,13 @@ README OUTLINE:
     -Copy paste above
     -Add how to boot it and examples
     -Contributing Authors
+#### Other Contributors
+    Thank you to all other students from our cohort. We worked together on many problems and unittests. 
 
-
-
+#### Future implementations:
+    We will add the Front end client side where the user can look up each location marker, which we assume would store data that is relevant to the consumer. Languages used will be the web dev trifecta, at minimum.
+    We will also include database storage to hold all the information and data about each venue or listing. We will use some version of SQL to query the database and fetch data.
+    We will integrate APIs with the project. Some examples can be Google Maps API for location and relevant info. Another great API is FourSquare and that has a great venue API that a user can use to look up nearby venues which can help them decide on their location of stay.
 
 
 
