@@ -92,6 +92,8 @@ class TestFileStorage(unittest.TestCase):
                 ['created_at', 'id', 'updated_at'])
 
         # Cell E
+        doesFileExist = User()
+        self.assertTrue(os.path.isfile("file.json"))
 
 if __name__ == "__main__":
     unittest.main()
