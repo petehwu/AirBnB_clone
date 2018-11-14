@@ -58,7 +58,7 @@ class TestFileStorage(unittest.TestCase):
         self.assertNotEqual(poop, notpoop)
         self.assertTrue(poop)
         self.assertFalse(poop == notpoop)
-        self.assertIs(poop,poopcopy)
+        self.assertIs(poop, poopcopy)
         self.assertIsNot(poop, notpoop)
         self.assertIsNotNone(poop)
         self.assertIsInstance(poop, FileStorage)
@@ -67,18 +67,23 @@ class TestFileStorage(unittest.TestCase):
     def test_google_doc(self):
         """ more harder tests """
         storage = FileStorage()
-        
-        # Cell B 
+        # TEST ALL. NO CELL A
+        # Cell B
         self.assertEqual(type(storage._FileStorage__objects), dict)
         self.assertTrue(storage._FileStorage__objects)
         self.assertEqual(type(storage._FileStorage__file_path), str)
         self.assertEqual(storage._FileStorage__file_path, "file.json")
 
-
         # Cell C
+        test = User()
+        test2 = test.id
+        key = "User." + test2
         all_storage = storage.all()
         self.assertEqual(type(all_storage), dict)
-        #self.assertEqual(type(all_storage[]), object)
+        self.assertEqual(str(type(
+                all_storage[key])), "<class 'models.user.User'>")
+
+        # Cell D
 
 
 if __name__ == "__main__":
