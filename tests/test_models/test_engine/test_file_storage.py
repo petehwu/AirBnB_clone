@@ -138,6 +138,10 @@ class TestFileStorage(unittest.TestCase):
             old_updated = bm.updated_at
             bm.save()
             self.assertNotEqual(old_updated, bm.updated_at)
+            os.remove("file.json")
+            self.assertFalse(os.path.isfile("file.json"))
+            bm.save()
+            self.assertTrue(os.path.isfile("file.json"))
 
 if __name__ == "__main__":
     unittest.main()
