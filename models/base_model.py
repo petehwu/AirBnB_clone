@@ -49,7 +49,10 @@ class BaseModel:
         models.storage.save()
 
     def to_dict(self):
-        """make dictionary with instance attributes"""
+        """ make dictionary with instance attributes.
+        We store the name of the object as the class.
+        We loop through all the attributes and store it in a dict.
+        If the attribute was time related, we convert to iso format """
         temp_dict = {}
         temp_dict['__class__'] = type(self).__name__
         for k, v in self.__dict__.items():
