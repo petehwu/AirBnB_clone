@@ -2,13 +2,35 @@
 
 ## OVERVIEW:
     This repo contains the basis of our AirBnB project.
-    We Made command line interpreter(CLI) to manage and manipulate Airbnb objects. Such objects are Users, Places, Places, Reviews, Amenities, etc. And Python is the language used so every one of our data points are their own classes, which are objects or dicts that stores attributes and info.
+    We made a command line interface(CLI) to manage and manipulate Airbnb-like objects. Such objects are Users, Places, Places, Reviews, Amenities, etc. And Python is the language used so every one of our data points are their own classes, which are objects or dicts that stores attributes and info.
 
 ## How to run this Repo:
 
     * git clone this repo  
-    * 
-Goals:
+    * cd into that directory and type "./console.py", you should be prompted with "(hbnb) " and that is our command line interpreter that we made.
+    * type "quit" or "ctrl/cmd + c" or "ctrl/cmd + d" to quit.
+    
+## Examples
+If you installed correctly, typing ./consoly.py in the command should give you this following prompt.
+    
+    (hbnb)
+
+Here we can type all which should display the file.json. If there is no file, an empty list is printed.
+
+    (hbnb) all
+    []
+    (hbnb) create BaseModel
+    f10f6866-410c-4299-a280-b4092478c6dd
+    (hbnb) all
+    ["[BaseModel] (f10f6866-410c-4299-a280-b4092478c6dd) {'id': 'f10f6866-410c-4299-a280-b4092478c6dd', 'created_at': datetime.datetime(2018, 11, 15, 5, 1, 18, 87626), 'updated_at': datetime.datetime(2018, 11, 15, 5, 1, 18, 87670)}"]
+
+
+
+
+
+
+Goals:  
+The goals of this repo were to create a base model (BaseModel)
     -Create parent class (BaseModel) that handles init, (de)serialization of instances
     -Translate data from |||||| Instance ←→ Dict ←→ JSON ←→ file
     -Create classes that inherit from BaseModel (User, State, City, Place, …)
