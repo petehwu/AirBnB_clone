@@ -6,6 +6,7 @@ import os
 from models.engine.file_storage import FileStorage
 from models.city import City
 
+
 class TestCity(unittest.TestCase):
     """test case for City"""
 
@@ -25,4 +26,4 @@ class TestCity(unittest.TestCase):
         self.assertEqual(type(c.state_id), str)
 
 if __name__ == "__main__":
-    unittest.main() 
+    unittest.main()

@@ -6,8 +6,29 @@ import os
 from models.engine.file_storage import FileStorage
 from models.place import Place
 
+
 class TestPlace(unittest.TestCase):
     """test case for Place"""
+
+    def setUp(self):
+        """ sets up this each test """
+        self.place = Place()
+        self.place.city_id = "100-100"
+        self.place.user_id = "101-101"
+        self.place.name = "place_name"
+        self.place.description = "place_description"
+        self.place.number_rooms = 5
+        self.place.number_bathrooms = 5
+        self.place.max_guest = 5
+        self.place.price_by_night = 5
+        self.place.latitude = 10.0
+        self.place.longitude = 10.0
+        self.place.amenity_ids = ["1-1-1", "2-2-2"]
+        self.storage = FileStorage()
+
+    def tearDown(self):
+        """ tears down after each test. resets """
+        del self.place
 
     def test_docstring(self):
         """ checks if docstring is there """
