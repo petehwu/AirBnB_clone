@@ -43,30 +43,29 @@ There are many other functions with a required amount of arguments, here are som
     
 So if an invalid number or value of arguments is entered, the console will report back. Some error string examples include "** class name missing \*\*", "\*\* class doesn't exist \*\*", and "\*\* attribute name missing \*\*".
     
+Our currently implemented classes are BaseModel, User, State, City, Amenity, Place, and Review.  
+Extra methods are "<class name>.all()", "<class name>.count()", "<class name>.show(<id>)", "<class name>.destroy(<id>)", "<class name>.update(<id>, <attribute name>, <attribute value>)", and "<class name>.update(<id>, <dictionary representation>)".
+    
+Each class has their own unit tests and they are still unfinished. There will be more included tests.  
 
 
-
-Goals:  
+#### TLDR Goals:  
 The goals of this repo were to create a base model (BaseModel)
-    -Create parent class (BaseModel) that handles init, (de)serialization of instances
-    -Translate data from |||||| Instance ←→ Dict ←→ JSON ←→ file
-    -Create classes that inherit from BaseModel (User, State, City, Place, …)
-    -Create file storage engine
-    -UNITTESTS. For classes and storage engine
+    * Create parent class (BaseModel) that handles initialization and (de)serialization of instances
+    * Translate data from |||||| Instance ←→ Dict ←→ JSON ←→ file
+    * Create classes that inherit from BaseModel (User, State, City, Place, …)
+    * Create file storage engine
+    * UNITTESTS. For classes and storage engine
 
 
 Command interpreter should be able to:
-    -Create an object
-    -Retrieve an object from a file, database, etc.
-    -Compute the object
-    -Update attributes on an object
-    -Delete object
+    * Create an object
+    * Retrieve an object from a file, database, etc.
+    * Compute the object
+    * Update attributes on an object
+    * Delete object
 
 
-README OUTLINE:
-    -Copy paste above
-    -Add how to boot it and examples
-    -Contributing Authors
 #### Other Contributors
     Thank you to all other students from our cohort. We worked together on many problems and unittests. 
 
@@ -77,10 +76,7 @@ README OUTLINE:
 
 
 
-
-
-
-Extra Trivia
+### Extra Trivia
 How to create a Python package
 https://docs.python.org/3.4/tutorial/modules.html#packages
 A python file can be a module but if that file is in a folder, that colder is called a package. In python, packages are everywhere
