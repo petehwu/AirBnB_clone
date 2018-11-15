@@ -60,7 +60,7 @@ class TestPlace(unittest.TestCase):
         p.price_by_night = 4
         p.latitude = 1.1
         p.longitude = 2.2
-        p.amenity_ids = [1,2]
+        p.amenity_ids = [1, 2]
 
         self.assertEqual(p.city_id, "a")
         self.assertEqual(p.user_id, "b")
@@ -72,7 +72,7 @@ class TestPlace(unittest.TestCase):
         self.assertEqual(p.price_by_night, 4)
         self.assertEqual(p.latitude, 1.1)
         self.assertEqual(p.longitude, 2.2)
-        self.assertListEqual(p.amenity_ids, [1,2])
+        self.assertListEqual(p.amenity_ids, [1, 2])
 
 if __name__ == "__main__":
     unittest.main()
