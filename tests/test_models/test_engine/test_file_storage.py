@@ -128,6 +128,15 @@ class TestFileStorage(unittest.TestCase):
             result = self.test.reload()
             self.assertTrue(result is not None)
 
+        def test_save(self):
+            bm = BaseModel()
+            self.assertIs(type(bm.id), str)
+            self.assertIs(type(bm.created_at), datetime)
+            self.assertIs(type(bm.updated_at), datetime)
+            old_updated = bm.updated_at
+            bm.save()
+            self.assertNotEqual(old_updated, bm.updated_at)
+
 
 if __name__ == "__main__":
     unittest.main()
