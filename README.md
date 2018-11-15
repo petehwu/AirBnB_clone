@@ -25,7 +25,24 @@ Here we can type all which should display the file.json. If there is no file, an
     ["[BaseModel] (f10f6866-410c-4299-a280-b4092478c6dd) {'id': 'f10f6866-410c-4299-a280-b4092478c6dd', 'created_at': datetime.datetime(2018, 11, 15, 5, 1, 18, 87626), 'updated_at': datetime.datetime(2018, 11, 15, 5, 1, 18, 87670)}"]
 
 
-
+There are many other functions with a required amount of arguments, here are some with their output if there was no file.json. Keep in mind your id and values returned back will vary and will not match exactly:
+    
+    (hbnb) create User
+    170fd5df-bca7-40b1-80b6-d6f6344e789e
+    (hbnb) show User 170fd5df-bca7-40b1-80b6-d6f6344e789e
+    [User] (170fd5df-bca7-40b1-80b6-d6f6344e789e) {'created_at': datetime.datetime(2018, 11, 15, 5, 5, 15, 663720), 'id': '170fd5df-bca7-40b1-80b6-d6f6344e789e', 'updated_at': datetime.datetime(2018, 11, 15, 5, 5, 15, 663778)}
+    (hbnb) update User 170fd5df-bca7-40b1-80b6-d6f6344e789e diablo "Immortal"
+    (hbnb) 
+    (hbnb) show User
+    ** instance id missing **
+    (hbnb) show User 170fd5df-bca7-40b1-80b6-d6f6344e789e
+    [User] (170fd5df-bca7-40b1-80b6-d6f6344e789e) {'id': '170fd5df-bca7-40b1-80b6-d6f6344e789e', 'diablo': 'Immortal', 'updated_at': datetime.datetime(2018, 11, 15, 5, 5, 15, 663778), 'created_at': datetime.datetime(2018, 11, 15, 5, 5, 15, 663720)}
+    (hbnb) destroy User 170fd5df-bca7-40b1-80b6-d6f6344e789e
+    (hbnb) show User 170fd5df-bca7-40b1-80b6-d6f6344e789e
+    ** no instance found **
+    
+So if an invalid number or value of arguments is entered, the console will report back. Some error string examples include "** class name missing \*\*", "\*\* class doesn't exist \*\*", and "\*\* attribute name missing \*\*".
+    
 
 
 
