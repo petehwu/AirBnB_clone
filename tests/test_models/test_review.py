@@ -16,7 +16,6 @@ class TestReview(unittest.TestCase):
         """ checks if docstring is there """
         self.assertIsNotNone(Review.__doc__)
 
-
     def test_review(self):
         """ checks review out. whatta hottie """
         r = Review()

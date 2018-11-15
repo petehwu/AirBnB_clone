@@ -29,7 +29,8 @@ class TestBaseModel(unittest.TestCase):
 
     def test_init_with_dict(self):
         """testing init method"""
-        dd = {"id": "123-123-123","key1": "val1", "key2": "val2", "key3": "val3"}
+        dd = {"id": "123-123-123",
+              "key1": "val1", "key2": "val2", "key3": "val3"}
         b = BaseModel(**dd)
         self.assertEqual(b.id, "123-123-123")
         self.assertEqual(b.key1, "val1")
