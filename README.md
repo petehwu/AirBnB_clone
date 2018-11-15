@@ -11,7 +11,7 @@
     * type "quit" or "ctrl/cmd + c" or "ctrl/cmd + d" to quit.
     
 ## Examples
-If you installed correctly, typing ./consoly.py in the command should give you this following prompt.
+If you installed correctly, typing ./console.py in the command should give you this following prompt.
     
     (hbnb)
 
