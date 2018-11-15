@@ -129,6 +129,8 @@ class TestFileStorage(unittest.TestCase):
             self.assertTrue(result is not None)
 
         def test_save(self):
+            """ tests the save(self) in BaseModel.
+            Added this post grading """
             bm = BaseModel()
             self.assertIs(type(bm.id), str)
             self.assertIs(type(bm.created_at), datetime)
@@ -136,7 +138,6 @@ class TestFileStorage(unittest.TestCase):
             old_updated = bm.updated_at
             bm.save()
             self.assertNotEqual(old_updated, bm.updated_at)
-
 
 if __name__ == "__main__":
     unittest.main()
