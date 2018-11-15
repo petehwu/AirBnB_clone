@@ -34,13 +34,17 @@ class BaseModel:
             models.storage.new(self)
 
     def __str__(self):
-        """ method to format BaseModel for printing"""
+        """ method to format BaseModel for printing.
+        We want to override the default __str__ out put to
+        name of object and the id and the dict """
         thestr = "[{:s}] ({:s}) {}".format(
               type(self).__name__, self.id, self.__dict__)
         return thestr
 
     def save(self):
-        """method to save the object"""
+        """ method to save the object.
+        We want to update the attribute updated_at with a newer time.
+        We then store the model in our storage data base """
         self.updated_at = datetime.now()
         models.storage.save()
 
