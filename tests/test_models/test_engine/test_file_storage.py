@@ -106,56 +106,67 @@ class TestFileStorage(unittest.TestCase):
         self.assertTrue(os.path.isfile("file.json"))
 
         # Cell G I stole this pep8 check online
-        def test_pep8_conformance(self):
-            """Test that we conform to PEP8."""
-            pep8style = pep8.StyleGuide(quiet=True)
-            result = pep8style.check_files(
-                    ['tests/test_models/test_engine/test_file_storage.py',
-                     'models/engine/file_storage.py'])
-            self.assertEqual(
-                    result.total_errors, 0,
-                    "Found code style errors (and warnings).")
-            # this doesnt work lol
+    def test_pep8_conformance(self):
+        """Test that we conform to PEP8."""
+        pep8style = pep8.StyleGuide(quiet=True)
+        result = pep8style.check_files(
+                ['tests/test_models/test_engine/test_file_storage.py',
+                 'models/engine/file_storage.py'])
+        self.assertEqual(
+                result.total_errors, 0,
+                "Found code style errors (and warnings).")
+        # this doesnt work lol
 
-        def test_methods(self):
-            """ tests the public instance mthods """
-            result = self.test.all()
-            self.assertTrue(result is not None)
-            result = self.test.new()
-            self.assertTrue(result is not None)
-            result = self.test.save()
-            self.assertTrue(result is not None)
-            result = self.test.reload()
-            self.assertTrue(result is not None)
+    def test_methods(self):
+        """ tests the public instance mthods """
+        result = self.test.all()
+        self.assertTrue(result is not None)
+        result = self.test.new()
+        self.assertTrue(result is not None)
+        result = self.test.save()
+        self.assertTrue(result is not None)
+        result = self.test.reload()
+        self.assertTrue(result is not None)
 
-        def test_save(self):
-            """ tests the save(self) in BaseModel.
-            Added this post grading """
-            bm = BaseModel()
-            self.assertIs(type(bm.id), str)
-            self.assertIs(type(bm.created_at), datetime.utcnow())
-            self.assertIs(type(bm.updated_at), datetime.utcnow())
-            old_updated = bm.updated_at
-            bm.save()
-            self.assertNotEqual(old_updated, bm.updated_at)
-            # another way to test save
-            os.remove("file.json")
-            self.assertFalse(os.path.isfile("file.json"))
-            bm.save()
-            self.assertTrue(os.path.isfile("file.json"))
-            # another way to test save
-            os.remove("file.json")
-            bm2 = BaseModel()
-            bm2.save()
-            with open("file.json", mode='r', encoding='utf-8') as f:
-                x = json.loads(f.read())
-                length1 = len(x)
-            bm3 = BaseModel()
-            bm3.save()
-            with open("file.json", mode='r', encoding='utf-8') as f:
-                x = json.loads(f.read())
-                length2 = len(x)
-            self.assertTrue(length2 > length1)
+    def test_save(self):
+        """ tests the save(self) in BaseModel.
+        Added this post grading """
+        bm = BaseModel()
+        self.assertIs(type(bm.id), str)
+        self.assertIs(type(bm.created_at), datetime.utcnow())
+        self.assertIs(type(bm.updated_at), datetime.utcnow())
+        old_updated = bm.updated_at
+        bm.save()
+        self.assertNotEqual(old_updated, bm.updated_at)
+        # another way to test save
+        os.remove("file.json")
+        self.assertFalse(os.path.isfile("file.json"))
+        bm.save()
+        self.assertTrue(os.path.isfile("file.json"))
+        # another way to test save
+        os.remove("file.json")
+        bm2 = BaseModel()
+        bm2.save()
+        with open("file.json", mode='r', encoding='utf-8') as f:
+            x = json.loads(f.read())
+            length1 = len(x)
+        bm3 = BaseModel()
+        bm3.save()
+        with open("file.json", mode='r', encoding='utf-8') as f:
+            x = json.loads(f.read())
+            length2 = len(x)
+        self.assertTrue(length2 > length1)
+
+    def test_save_is_dict(self):
+        """ tests to see if the return type of save is a string """
+        bm = BaseModel()
+        bm.save()
+        self.assertIsInstance(bm.to_dict()['created_at'], str)
+        self.assertIsInstance(bm.to_dict()['updated_at'], str)
+
+    def test_has_attr(self):
+        """ tests if the base model has the attr """
+        self.assertTrue(hasattr(BaseModel, "save"))
 
 if __name__ == "__main__":
     unittest.main()
