@@ -133,8 +133,8 @@ class TestFileStorage(unittest.TestCase):
             Added this post grading """
             bm = BaseModel()
             self.assertIs(type(bm.id), str)
-            self.assertIs(type(bm.created_at), datetime)
-            self.assertIs(type(bm.updated_at), datetime)
+            self.assertIs(type(bm.created_at), datetime.utcnow())
+            self.assertIs(type(bm.updated_at), datetime.utcnow())
             old_updated = bm.updated_at
             bm.save()
             self.assertNotEqual(old_updated, bm.updated_at)
