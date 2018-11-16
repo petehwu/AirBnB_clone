@@ -39,5 +39,16 @@ class TestUser(unittest.TestCase):
         self.assertEqual(u.last_name, "w")
         self.assertEqual(u.password, "x")
 
+    def test_save_is_dict(self):
+        """ tests to see if the return type of save is a string """
+        bm = User()
+        bm.save()
+        self.assertIsInstance(bm.to_dict()['created_at'], str)
+        self.assertIsInstance(bm.to_dict()['updated_at'], str)
+
+    def test_has_attr(self):
+        """ tests if the base model has the attr """
+        self.assertTrue(hasattr(User, "save"))
+
 if __name__ == "__main__":
     unittest.main()

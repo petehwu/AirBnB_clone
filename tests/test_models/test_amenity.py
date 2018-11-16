@@ -22,5 +22,16 @@ class TestAmenity(unittest.TestCase):
         a.name = "b"
         self.assertEqual(a.name, "b")
 
+    def test_save_is_dict(self):
+        """ tests to see if the return type of save is a string """
+        bm = Amenity()
+        bm.save()
+        self.assertIsInstance(bm.to_dict()['created_at'], str)
+        self.assertIsInstance(bm.to_dict()['updated_at'], str)
+
+    def test_has_attr(self):
+        """ tests if the base model has the attr """
+        self.assertTrue(hasattr(Amenity, "save"))
+
 if __name__ == "__main__":
     unittest.main()
