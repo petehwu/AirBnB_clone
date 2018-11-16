@@ -17,6 +17,8 @@ class TestBaseModel(unittest.TestCase):
         self.assertIs(type(bm.id), str)
         self.assertIs(type(bm.created_at), datetime)
         self.assertIs(type(bm.updated_at), datetime)
+        self.assertNotEqual(bm.created_at, bm.updated_at)
+        self.assertFalse(bm.updated_at == datetime.utcnow())
         old_updated = bm.updated_at
         bm.save()
         self.assertNotEqual(old_updated, bm.updated_at)
