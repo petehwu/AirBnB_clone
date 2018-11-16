@@ -74,5 +74,16 @@ class TestPlace(unittest.TestCase):
         self.assertEqual(p.longitude, 2.2)
         self.assertListEqual(p.amenity_ids, [1, 2])
 
+    def test_save_is_dict(self):
+        """ tests to see if the return type of save is a string """
+        bm = Place()
+        bm.save()
+        self.assertIsInstance(bm.to_dict()['created_at'], str)
+        self.assertIsInstance(bm.to_dict()['updated_at'], str)
+
+    def test_has_attr(self):
+        """ tests if the base model has the attr """
+        self.assertTrue(hasattr(Place, "save"))
+
 if __name__ == "__main__":
     unittest.main()
