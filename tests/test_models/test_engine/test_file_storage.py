@@ -5,6 +5,7 @@ import os
 import json
 import pep8
 import unittest
+from datetime import datetime
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
 from models.user import User
@@ -119,22 +120,19 @@ class TestFileStorage(unittest.TestCase):
 
     def test_methods(self):
         """ tests the public instance mthods """
-        result = self.test.all()
-        self.assertTrue(result is not None)
-        result = self.test.new()
-        self.assertTrue(result is not None)
-        result = self.test.save()
-        self.assertTrue(result is not None)
-        result = self.test.reload()
-        self.assertTrue(result is not None)
+        bm = FileStorage()
+        self.assertTrue(hasattr(bm, "all"))
+        self.assertTrue(hasattr(bm, "new"))
+        self.assertTrue(hasattr(bm, "save"))
+        self.assertTrue(hasattr(bm, "reload"))
 
     def test_save(self):
         """ tests the save(self) in BaseModel.
         Added this post grading """
         bm = BaseModel()
         self.assertIs(type(bm.id), str)
-        self.assertIs(type(bm.created_at), datetime.utcnow())
-        self.assertIs(type(bm.updated_at), datetime.utcnow())
+        self.assertLessEqual(bm.created_at, datetime.utcnow())
+        self.assertLessEqual(bm.updated_at, datetime.utcnow())
         old_updated = bm.updated_at
         bm.save()
         self.assertNotEqual(old_updated, bm.updated_at)
