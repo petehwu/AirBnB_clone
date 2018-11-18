@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """ console that contains the entry point """
 
-
 import cmd  # test
 from models.base_model import BaseModel
 import shlex
@@ -27,15 +26,16 @@ class HBNBCommand(cmd.Cmd):
         """Quit command to exit the program
         """
         exit()  # not sure if there is a desired return value
+        # This expects a return True but for now, exit works just fine.
 
     def do_EOF(self, line):
         """ EOF calls on quit """
-        print()
+        print()  # for a new line
         exit()  # assuming EOF function does the same as do_quit
 
     def emptyline(self):
         """ do nothing """
-        pass
+        pass  # will get a new line and aprompt
 
     # The above is for Console 0.0.1
     # Below is for Console 0.1 or task 7 and onwards
@@ -107,11 +107,11 @@ class HBNBCommand(cmd.Cmd):
         if (len(line) < 1):
             print(["{}".format(v) for k, v in storage.all().items()])
         # print all instances but does not print empty brackets if empty
-        else:
+        else:  # first check if the class is in our list of classes
             tokenize = shlex.split(line)
             if tokenize[0] not in self.classes:
                 print("** class doesn't exist **")
-            else:
+            else:  # print everything we have
                 print(["{}".format(v) for k, v in storage.all().items()
                        if type(v).__name__ in tokenize[0]])
 
@@ -125,7 +125,7 @@ class HBNBCommand(cmd.Cmd):
         # try an if or try in case arguments are bad?!?!
         if len(line) < 1:
             print("** class name missing **")
-        else:
+        else:  # just number of arguments checking
             tokenize = shlex.split(line)
             if len(tokenize) == 3:
                 print("** value missing **")
@@ -133,43 +133,43 @@ class HBNBCommand(cmd.Cmd):
                 print("** attribute name missing **")
             elif len(tokenize) == 1:
                 print("** instance id missing **")
-            else:
+            else:  # of arguments is correct, now check if class exists
                 if tokenize[0] not in self.classes:
                     print("** class doesn't exist **")
-                else:
+                else:  # check if the id exists
                     key = tokenize[0] + "." + tokenize[1]
                     if key not in storage.all():
                         print("** no instance found **")
-                    else:
+                    else:  # we have a match! now check the data types
                         obj = storage.all().get(key, 0)
-                        try:
+                        try:  # we will try to set attr
                             setattr(obj, tokenize[2], type(getattr(obj,
                                     tokenize[2]))(tokenize[3]))
-                        except AttributeError:
-                            try:
+                        except AttributeError:  # the attr data type is bad
+                            try:  # try with int casting, it it works yey
                                 val = int(tokenize[3])
                             except ValueError:
-                                try:
+                                try:  # try with float cause int didnt work
                                     val = float(tokenize[3])
                                 except ValueError:
-                                    val = str(tokenize[3])
-                            setattr(obj, tokenize[2], val)
-                        storage.save()
+                                    val = str(tokenize[3])  # try with str
+                            setattr(obj, tokenize[2], val)  # set attribute
+                        storage.save()  # save the object to storage
 
     def do_count(self, line):
-        """ counts number of objects of specified class"""
-        if len(line) < 1:
+        """ counts number of objects of specified class """
+        if len(line) < 1:  # checks id there is a class name
             print("** class name missing **")
-        else:
+        else:  # We split the input and if class given exists
             tokenize = shlex.split(line)
             if tokenize[0] not in self.classes:
                 print("** class doesn't exist **")
-            else:
+            else:  # we have a counter now for each class
                 cnt = 0
-                obj = storage.all()
-                for k, v in obj.items():
+                obj = storage.all()  # obj is our data storage
+                for k, v in obj.items():  # this increases our counter
                     if type(v).__name__ == tokenize[0]:
-                        cnt += 1
+                        cnt += 1  # by matching all class names
                 print(cnt)
 
     def default(self, line):
@@ -177,10 +177,16 @@ class HBNBCommand(cmd.Cmd):
         methods = {"all": self.do_all, "count": self.do_count,
                    "show": self.do_show, "destroy": self.do_destroy,
                    "update": self.do_update}
+        # we have a dict for the advance problems. we already coded the
+        # basic functionalities the advance problems require. so we will just
+        # redirect and call on those functions that we have made.
+        # Peter did this part. he did a lot of string manipulation with . as
+        # a delimiter but i would have tried to add . as a white space
+        # attribute in the shlex arguments.
         key = line.split(".")
         if len(key) < 2:
             print("** missing arguments **")
-        else:
+        else:  # lol peter did some crazy string manipulation
             subkey = key[1].split("(")
             if subkey[0] not in methods:
                 print("** invalid command **")

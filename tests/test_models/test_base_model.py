@@ -49,6 +49,14 @@ class TestBaseModel(unittest.TestCase):
     def test_has_attr(self):
         """ tests if the base model has the attr """
         self.assertTrue(hasattr(BaseModel, "save"))
+        # save(self)
+        self.assertTrue(hasattr(BaseModel, "__init__"))
+        self.assertTrue(hasattr(BaseModel, "to_dict"))
 
+    def test_doc_strings(self):
+        """ tests if there are doc strings to all methods """
+        self.assertTrue(BaseModel.__doc__)
+        self.assertTrue(BaseModel.save.__doc__)
+        self.assertTrue(BaseModel.to_dict.__doc__)
 if __name__ == '__main__':
     unittest.main()
