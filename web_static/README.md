@@ -4,6 +4,8 @@
 Learning about HTML and CSS by creating a static website for the airbnb clone project
 
 ### Files:
+File|Desc
+---|---
 0-index.html |html file
 1-index.html |html file
 2-index.html |html file
